@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    body{
+      background-image: url("job2.jpeg");
+      text-align: center;
+    }
+    .lable
+    {
+      font-size: large;
+      font-weight: italic;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Portal</title>
+</head>
+<body>
+
+  <h1>Job Portal</h1>
+<ul>
+  <li>step1-enetr your full name</li><br>
+</ul>
+  <form id="projectForm" enctype="multipart/form-data">
+    <label for="username">Username:</label>
+    <input type="text" id="username" required><br><br>
+    <ul>
+      <li>step2-enter the skills you are good at</li><br>
+    </ul>
+    <label for="skills">Skills:</label>
+    <input type="text" id="skills" required>
+    <input type="text" id="skills" required>
+    <input type="text" id="skills" required><br><br>
+    <ul>
+      <li>step3-enetr the name of the projects done</li>
+  
+    <label for="projectName">Project Name:</label>
+    <input type="text" id="projectName" required>
+    </ul>
+    step4-upload your job resume
+    <label for="projectFile">Upload resume:</label>
+    <input type="file" id="projectFile" name="projectFile" accept=".zip, .tar, .rar" required>
+
+    <button type="button" onclick="submitProjectForm()">
+      <a href="https://www.google.com/search?q=software+companies+links&sca_esv=0b5817b7e7a7cdce&rlz=1C1ONGR_enIN1088IN1088&sxsrf=ACQVn09EWK5kZQOy6aSJ8iTRuIz7F_k7Lg:1707012893707&ei=HfO-ZaLnKuSXseMPqY2J4Aw&uact=5&oq=software+companies+links&gs_lp=Egxnd3Mtd2l6LXNlcnAiGHNvZnR3YXJlIGNvbXBhbmllcyBsaW5rczIIEAAYgAQYogQyCBAAGIAEGKIESLl1UN8EWONtcAF4AZABAJgBuwGgAdAIqgEDMC44uAEDyAEA-AEBwgIKEAAYRxjWBBiwA8ICDRAAGIAEGIoFGEMYsAPCAgoQIxiABBiKBRgnwgILEAAYgAQYigUYkgPCAgUQABiABMICChAAGIAEGAoYyQPCAgoQABiABBiKBRhDwgIHEAAYgAQYCsICBxAAGIAEGA3CAgYQABgWGB7CAgsQABiABBiKBRiGA8ICCRAhGAoYoAEYCuIDBBgAIEGIBgGQBgo&sclient=gws-wiz-serp&ibp=htl;jobs&sa=X&ved=2ahUKEwi35azRzpCEAxXOS2cHHUHECT0QudcGKAF6BAgUECk#htivrt=jobs&htidocid=_O09m6hdM3zkP8kqAAAAAA%3D%3D&fpstate=tldetail">search</a></button>
+
+  <button type="button" >
+    <a href="f5.html">log out</a>
+  </button>
+  </form>
+
+  <script>
+    async function submitProjectForm() {
+      const username = document.getElementById('username').value;
+      const projectName = document.getElementById('projectName').value;
+      const projectFile = document.getElementById('projectFile').files[0];
+
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('projectName', projectName);
+      formData.append('projectFile', projectFile);
+
+      const response = await fetch('http://localhost:3000/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log('Project uploaded successfully!');
+      } else {
+        console.error('Failed to upload project');
+      }
+    }
+  </script>
+</body>
+</html>
